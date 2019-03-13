@@ -26,7 +26,7 @@ foreach($line in Get-Content $names) {
             try {
                 $eaInfo = $null;
                 $eaInfo = Get-ADUser -LDAPFilter "(extensionAttribute1=$eA1)"
-                write-host "[?] Checking if extensionattribute1 $eA1 is taken.."
+                write-host "[?] Checking if extensionAttribute1 $eA1 is taken.."
                 if ($eaInfo -ne $null) {
                     Write-Host "[!] ExtensionAttribute $eA1 already taken." -ForegroundColor yellow
                     ($line).SamAccountName
