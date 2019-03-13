@@ -1,6 +1,6 @@
 Import-Module activedirectory
 $names = "ex-list.txt"
-$group = "G-GLOBAL-M3CloudUsers"
+$group = "M3-Group"
 $members =  Get-ADGroupMember -Identity $group -Recursive | Select -ExpandProperty SamAccountName
 $summary = "ex-summary.txt"
 if (Test-Path $summary){
@@ -53,14 +53,14 @@ foreach($line in Get-Content $names) {
         catch {
             write-host "[!] Error! Are you sure the name is correct? You typed $line." -ForegroundColor Red
         }
-        write-host "[?] Checking if user $line is member of G-GLOBAL-M3CloudUsers..."
+        write-host "[?] Checking if user $line is member of M3-Group..."
         if($members -contains $line) {
-            write-host "[-] User $line already exists in M3 group" -ForegroundColor Red
+            write-host "[-] User $line already exists in M3-group" -ForegroundColor Red
         } else {
             Add-ADGroupMember -Identity $group -Members $line
 
-            write-host "[+] User $line added to G-GLOBAL-M3CloudUsers"
-            add-content ex-summary.txt "Group: G-GLOBAL-M3CloudUsers`n"
+            write-host "[+] User $line added to M3-Group"
+            add-content ex-summary.txt "Group: M3-Group`n"
     }
     add-content ex-summary.txt "-----------------------------"
 }
